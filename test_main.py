@@ -1,6 +1,6 @@
 import parser
 
-sentence = 'Throw Dirty rock at the mangey goblin'
+sentence = 'Throw Dirty rock at that mangey old goblin'
 print("testing input stentence:", sentence)
 
 ip = parser.InputParser()

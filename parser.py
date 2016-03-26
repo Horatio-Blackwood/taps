@@ -9,6 +9,9 @@ from enum import Enum
 
 
 class WordType(Enum):
+    """
+    An enumeration of WordTypes from the Parts of Speech.
+    """
     VERB = 0
     ADJECTIVE = 1
     NOUN = 2
@@ -22,6 +25,11 @@ class ParserContext(object):
 
     The ParserContext is not planned to be persisted between application runs, however ,if this state proves to be
     valuable enough to keep between runs of the game, it could be persisted.
+
+    :param adjectives - the list of adjectives the parser should know about..
+    :param nouns - the list of nouns the parser should know about.
+    :param prepositions - the list of prepositions the parser should know about.
+    :param verbs - the list of verbs the parser should know about.
     """
     def __init__(self,adjectives=[], nouns=[], prepositions=[], verbs=[]):
         self.last_noun = None
@@ -50,12 +58,18 @@ class StatementStructure(object):
 class InputParser(object):
 
     def __init__(self):
-        self.valid_structures = [(WordType.VERB, WordType.NOUN), (WordType.VERB, WordType.NOUN, WordType.PREPOSITION, WordType.NOUN)]
+        # Basically only two structures are supported VERB NOUN and VERB NOUN PREPOSITION NOUN, but each noun
+        # can optionally have an adjective.
+        self.valid_structures = [(WordType.VERB, WordType.NOUN),
+                                 (WordType.VERB, WordType.ADJECTIVE, WordType.NOUN),
+                                 (WordType.VERB, WordType.NOUN, WordType.PREPOSITION, WordType.NOUN),
+                                 (WordType.VERB, WordType.NOUN, WordType.PREPOSITION, WordType.ADJECTIVE, WordType.NOUN),
+                                 (WordType.VERB, WordType.ADJECTIVE, WordType.NOUN, WordType.PREPOSITION, WordType.NOUN),
+                                 (WordType.VERB, WordType.ADJECTIVE, WordType.NOUN, WordType.PREPOSITION, WordType.ADJECTIVE, WordType.NOUN)]
 
         # Initialize Parser Context
         a, n, p, v = self.__load_data()
         self.parser_context = ParserContext(a, n, p, v)
-
 
     def __load_data(self):
         """
@@ -68,7 +82,6 @@ class InputParser(object):
         verbs = tools.read_word_file("data/verbs.txt")
 
         return adjectives, nouns, prepositions, verbs
-
 
     def sanitize_input(self, input_string):
         """
@@ -92,7 +105,6 @@ class InputParser(object):
         words = input_string.split(" ")
 
         return words
-
 
     def __determine_structure(self, input_string):
         """
