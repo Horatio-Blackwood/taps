@@ -1,6 +1,0 @@
-# COMMANDS
-equipment
-leavenote
-newgame
-quit
-stats

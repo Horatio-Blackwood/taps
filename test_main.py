@@ -20,7 +20,6 @@ def read_word_file(file):
     return words
 
 
-
 def sort_file(infile, outfile=None):
     """
     Reads in a file line by line, and sorts the lines alphabetically.
@@ -48,11 +47,12 @@ sentence = 'Throw Dirty rock at that mangey old goblin'
 print("testing input stentence:", sentence)
 
 # Init the Game Dictionary
-nouns = read_word_file("data/nouns.txt")
-verbs = read_word_file("data/verbs.txt")
-prepositions = read_word_file("data/prepositions.txt")
-adjectives = read_word_file("data/adjectives.txt")
-game_dictionary = taps.GameDictionary(adjectives, [], nouns, prepositions, verbs)
+adjectives = ['dirty', 'shiny']
+commands = ['quit']
+nouns = ['goblin', 'rock']
+prepositions = ['above', 'at', 'with']
+verbs = ['throw', 'attack', 'look']
+game_dictionary = taps.GameDictionary(adjectives, commands, nouns, prepositions, verbs)
 
 # Create Parser
 ip = taps.InputParser(game_dictionary)
