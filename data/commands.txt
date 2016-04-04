@@ -1,5 +1,6 @@
-# Commands
+# COMMANDS
+equipment
+leavenote
+newgame
 quit
 stats
-inventory
-leavenote
