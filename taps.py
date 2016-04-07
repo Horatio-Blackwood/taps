@@ -70,8 +70,19 @@ class GameDictionary(object):
 
 class StatementStructure(object):
     def __init__(self, structure, unrecognized_words=[]):
+        """
+        Creates a new instance of StatementStructure.
+
+        :param structure - a List of 2-tuples constructed as follows:  WordType instance and a String
+        representing the word.
+
+        :param unrecognized_words a List of Strings that were the words in the input that were not
+        recognized.
+        """
         self.structure = structure
-        self.unrecognizd_words = unrecognized_words
+
+        # TODO this should probably be a tuple so that it is immutable.
+        self.unrecognized_words = unrecognized_words
 
     def get_structure(self):
         """
@@ -130,7 +141,6 @@ class InputParser(object):
                                  (WordType.VERB, WordType.NOUN, WordType.PREPOSITION, WordType.ADJECTIVE, WordType.NOUN),
                                  (WordType.VERB, WordType.ADJECTIVE, WordType.NOUN, WordType.PREPOSITION, WordType.NOUN),
                                  (WordType.VERB, WordType.ADJECTIVE, WordType.NOUN, WordType.PREPOSITION, WordType.ADJECTIVE, WordType.NOUN)]
-
 
     def sanitize_input(self, input_string):
         """
@@ -225,12 +235,14 @@ class InputParser(object):
         # Generate Statement Structure
         statement = self.__determine_structure(input_string)
 
-        print("Unrecognized Words", statement.unrecognizd_words)
+        """
+        print("Unrecognized Words", statement.unrecognized_words)
         print("Structure", statement.structure)
 
         if statement.get_structure() in self.valid_structures:
             print("Structure supported:", statement.get_structure())
         else:
             print("Structure not supported:", statement.get_structure())
+        """
 
         return statement

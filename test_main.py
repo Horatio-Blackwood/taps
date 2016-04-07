@@ -44,7 +44,7 @@ def sort_file(infile, outfile=None):
 
 # Basic Test Data
 sentence = 'Throw Dirty rock at that mangey old goblin'
-print("testing input stentence:", sentence)
+print("testing input sentence:", sentence)
 
 # Init the Game Dictionary
 adjectives = ['dirty', 'shiny']
